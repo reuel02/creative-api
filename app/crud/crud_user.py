@@ -1,7 +1,5 @@
 from app.models.schedule import Schedule
-from Lib.site-packages.sqlalchemy.sql import select
-from Lib.site-packages.sqlalchemy import select
-from Lib.site-packages.sqlalchemy.orm import query
+from sqlalchemy import select
 from app.models.user import User
 from fastapi import Request
 from app.schemas.user import UserCreate
@@ -23,11 +21,15 @@ async def create_user(session: AsyncSession, schema: UserCreate):
     except Exception as e:
         return {"message": str(e)}
 
-async def get_users_by_department(session: AsyncSession, department_id):
+async def get_users_by_department(session: AsyncSession, department_id: int):
     try:
         query = select(User).join(Schedule).where(Schedule.department_id == department_id)
 
-        resultado
+        resultado = await session.execute(query)
+
+        usuarios = resultado.scalars().all()
+
+        return usuarios
     except Exception as e:
         return {"message": str(e)}
 
