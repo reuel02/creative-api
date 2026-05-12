@@ -5,6 +5,8 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from app.core.database import Base
+from app.models import user, department, schedule
+
 
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
@@ -15,6 +17,14 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+database_url = os.getenv("DATABASE_URL")
+if database_url:
+    config.set_main_option("sqlalchemy.url", database_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
