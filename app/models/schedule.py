@@ -1,8 +1,9 @@
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, String, Text
 from app.core.database import Base
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from datetime import datetime
 from sqlalchemy import DateTime
+from typing import Optional
 
 class Schedule(Base):
     __tablename__ = 'escalas'
@@ -12,5 +13,11 @@ class Schedule(Base):
     department_id: Mapped[int] = mapped_column(ForeignKey("departamentos.id"))
     data_hora: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
+    # Novos campos
+    culto_id: Mapped[Optional[int]] = mapped_column(ForeignKey("cultos.id"), nullable=True)
+    observacoes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Relationships
     usuario: Mapped["User"] = relationship("User", back_populates="escalas")
     departamento: Mapped["Department"] = relationship("Department", back_populates="escalas")
+    culto: Mapped[Optional["Cult"]] = relationship("Cult", back_populates="escalas")

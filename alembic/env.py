@@ -5,7 +5,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from app.core.database import Base
-from app.models import user, department, schedule, cults
+from app.models import user, department, schedule, cult
 
 
 from sqlalchemy import pool
