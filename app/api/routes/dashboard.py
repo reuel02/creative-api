@@ -25,11 +25,9 @@ async def get_metrics(session: AsyncSession = Depends(get_db)):
 
     total_cults = await get_total_cults(session)
 
-    response: MetricsResponse = {
-        total_schedules,
-        total_users,
-        total_departments,
-        total_cults
+    return {
+        "total_schedules": total_schedules,
+        "total_users": total_users,
+        "total_departments": total_departments,
+        "total_cults": total_cults
     }
-
-    return response

@@ -11,9 +11,10 @@ app = FastAPI()
 
 # Configuração do CORS
 origins = [
-    "http://localhost:3000", # Frontend rodando localmente no React/Next.js
-    "http://localhost:5173", # Frontend rodando no Vite (caso use)
-    # Adicione outros domínios aqui quando for para produção (ex: "https://meusite.com")
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(
